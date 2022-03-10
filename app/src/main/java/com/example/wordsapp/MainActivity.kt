@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
         // else menu.icon = ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
         menuItem.icon =
             if (isLinearLayoutManager)
-                ContextCompat.getDrawable(this,R.drawable.ic_grid_layout)
-            else ContextCompat.getDrawable(this,R.drawable.ic_linear_layout)
+                ContextCompat.getDrawable(this,R.drawable.ic_linear_layout)
+            else ContextCompat.getDrawable(this,R.drawable.ic_grid_layout)
 
     }
 
