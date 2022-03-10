@@ -16,6 +16,7 @@
 package com.example.wordsapp
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -41,16 +42,48 @@ class MainActivity : AppCompatActivity() {
         // Sets the LinearLayoutManager of the recyclerview
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = LetterAdapter()
+//        Sets the LinearLayoutManager of the recyclerview
+        chooseLayout()
     }
-    private fun chooseLayout(){
-        if (isLinearLayoutManager){
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.layout_menu, menu)
+        val layoutButton = menu?.findItem(R.id.action_switch_layout)
+//        calla code to set the icon based on the LinearLayoutManager of the RecyclerView
+        setIcon(layoutButton)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_switch_layout->{
+//                Sets isLinearLayoutManager (a boolean) to thr opposite value
+                isLinearLayoutManager = !isLinearLayoutManager
+//                Sets layout and icon
+                chooseLayout()
+                setIcon(item)
+                return true
+            }
+            //  Otherwise, do nothing and use the core event handling
+
+            // when clauses require that all possible paths be accounted for explicitly,
+            //  for instance both the true and false cases if the value is a Boolean,
+            //  or an else to catch all unhandled cases.
+            else -> super.onOptionsItemSelected(item)
+
+        }
+    }
+
+    private fun chooseLayout() {
+        if (isLinearLayoutManager) {
             recyclerView.layoutManager = LinearLayoutManager(this)
-        }else{
-            recyclerView.layoutManager = GridLayoutManager(this,4)
+        } else {
+            recyclerView.layoutManager = GridLayoutManager(this, 4)
         }
         recyclerView.adapter = LetterAdapter()
     }
-    private fun setIcon(menuItem: MenuItem?){
+
+    private fun setIcon(menuItem: MenuItem?) {
         if (menuItem == null)
             return
         // Set the drawable for the menu icon based on which LayoutManager is currently in use
@@ -62,8 +95,8 @@ class MainActivity : AppCompatActivity() {
         // else menu.icon = ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
         menuItem.icon =
             if (isLinearLayoutManager)
-                ContextCompat.getDrawable(this,R.drawable.ic_linear_layout)
-            else ContextCompat.getDrawable(this,R.drawable.ic_grid_layout)
+                ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
+            else ContextCompat.getDrawable(this, R.drawable.ic_grid_layout)
 
     }
 
