@@ -15,16 +15,17 @@ class WordListFragment : Fragment() {
         const val LETTER = "letter"
         const val SEARCH_PREFIX =  "https://www.google.com/search?q="
     }
-    var _binding:FragmentWordListBinding?=null
-    val binding get() = _binding
+    private var _binding:FragmentWordListBinding?=null
+    private val binding get() = _binding!!
+    val recyclerView = binding.recyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWordListBinding.inflate(inflater,container,false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,16 +35,16 @@ class WordListFragment : Fragment() {
         // so toString() guarantees that the value will be a String
         val letterId = activity?.intent?.extras?.getString(DetailActivity.LETTER).toString()
 
-        val recyclerView = binding?.recyclerView
-        recyclerView?.layoutManager = LinearLayoutManager(context)
-        recyclerView?.adapter = WordAdapter(letterId, requireContext())
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = WordAdapter(activity?.intent?.extras?.getString(LETTER).toString(), requireContext())
 
         // Adds a [DividerItemDecoration] between items
-        recyclerView?.addItemDecoration(
+        recyclerView.addItemDecoration(
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         )
 
-        title = getString(R.string.detail_prefix) + " " + letterId
+
     }
 
     override fun onDestroy() {
