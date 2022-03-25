@@ -46,4 +46,9 @@ class WordListFragment : Fragment() {
         title = getString(R.string.detail_prefix) + " " + letterId
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }
