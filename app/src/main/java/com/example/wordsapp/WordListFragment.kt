@@ -1,6 +1,5 @@
 package com.example.wordsapp
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +40,7 @@ class WordListFragment : Fragment() {
         // Retrieve the LETTER from the Intent extras
         // intent.extras.getString returns String? (String or null)
         // so toString() guarantees that the value will be a String
-        val letterId = activity?.intent?.extras?.getString(WordListFragment.LETTER).toString()
+        val letterId = activity?.intent?.extras?.getString(LETTER).toString()
 
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
