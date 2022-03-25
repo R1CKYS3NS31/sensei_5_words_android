@@ -33,7 +33,7 @@ class WordListFragment : Fragment() {
         // Retrieve the LETTER from the Intent extras
         // intent.extras.getString returns String? (String or null)
         // so toString() guarantees that the value will be a String
-        val letterId = activity?.intent?.extras?.getString(DetailActivity.LETTER).toString()
+        val letterId = activity?.intent?.extras?.getString(WordListFragment.LETTER).toString()
 
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
