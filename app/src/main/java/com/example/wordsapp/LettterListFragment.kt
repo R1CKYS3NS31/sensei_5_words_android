@@ -1,9 +1,7 @@
 package com.example.wordsapp
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wordsapp.databinding.FragmentLettterListBinding
@@ -26,5 +24,16 @@ class LettterListFragment : Fragment() {
         _binding = FragmentLettterListBinding.inflate(inflater,container,false)
         val view = binding.root
         return view
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.layout_menu,menu)
+        val layoutButton = menu.findItem(R.id.action_switch_layout)
+        setIcon(layoutButton)
     }
 }
